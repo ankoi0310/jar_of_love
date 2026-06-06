@@ -6,6 +6,7 @@ import Footer from "@/components/Footer";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { Lock, Mail, Heart, Sparkles } from "lucide-react";
+import { supabase } from "@/lib/supabase";
 
 export default function LoginPage() {
   const router = useRouter();
@@ -13,7 +14,7 @@ export default function LoginPage() {
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError("");
     setSuccess("");
@@ -23,32 +24,26 @@ export default function LoginPage() {
       return;
     }
 
-    // Check localStorage users
-    const users = JSON.parse(localStorage.getItem("users") || "[]");
-    const matchedUser = users.find(
-      (u: any) => u.email.toLowerCase() === formData.email.toLowerCase() && u.password === formData.password
-    );
+    const { data, error } = await supabase.auth.signInWithPassword({
+      email: formData.email,
+      password: formData.password,
+    });
 
-    if (matchedUser) {
-      localStorage.setItem("currentUser", JSON.stringify(matchedUser));
+    if (error) {
+      setError(error.message);
+      return;
+    }
+
+    if (data.session) {
+      // Store user info locally if needed
+      localStorage.setItem("currentUser", JSON.stringify(data.session.user));
       setSuccess("Đăng nhập thành công! Đang chuyển hướng...");
       setTimeout(() => {
         router.push("/jars");
       }, 1200);
-    } else {
-      // Fallback fallback for demonstration
-      if (formData.email === "demo@love.com" && formData.password === "123456") {
-        const demoUser = { email: "demo@love.com", name: "Người Yêu Demo" };
-        localStorage.setItem("currentUser", JSON.stringify(demoUser));
-        setSuccess("Đăng nhập thành công (Demo Account)!");
-        setTimeout(() => {
-          router.push("/jars");
-        }, 1200);
-      } else {
-        setError("Email hoặc mật khẩu không chính xác.");
-      }
     }
   };
+
 
   return (
     <>

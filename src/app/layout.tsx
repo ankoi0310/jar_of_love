@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
 import { Quicksand, Caveat, Courier_Prime } from "next/font/google";
 import "./globals.css";
+import AuthClientWrapper from "@/components/AuthClientWrapper";
 
 const quicksand = Quicksand({
   variable: "--font-quicksand",
-  subsets: ["latin", "vietnamese"],
+  subsets: ["latin"],
   weight: ["300", "400", "500", "600", "700"],
 });
 
@@ -48,12 +49,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html
-      lang="vi"
-      className={`${quicksand.variable} ${caveat.variable} ${courierPrime.variable} h-full scroll-smooth antialiased`}
-    >
-      <body className="min-h-full flex flex-col font-sans bg-[#FFF1F1] text-gray-800">
-        {children}
+    <html lang="vi" className={`${quicksand.variable} ${caveat.variable} ${courierPrime.variable} h-full scroll-smooth antialiased`}>
+      <body className="min-h-full flex flex-col font-sans bg-brand-pink-light text-gray-800">
+        <AuthClientWrapper>{children}</AuthClientWrapper>
       </body>
     </html>
   );

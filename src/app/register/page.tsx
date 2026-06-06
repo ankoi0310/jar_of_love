@@ -6,6 +6,7 @@ import Footer from "@/components/Footer";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { User, Mail, Lock, Heart, CheckSquare } from "lucide-react";
+import { supabase } from "@/lib/supabase";
 
 export default function RegisterPage() {
   const router = useRouter();
@@ -13,7 +14,7 @@ export default function RegisterPage() {
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError("");
     setSuccess("");
@@ -28,29 +29,19 @@ export default function RegisterPage() {
       return;
     }
 
-    // Save user to localStorage
-    const users = JSON.parse(localStorage.getItem("users") || "[]");
-    const userExists = users.some((u: any) => u.email.toLowerCase() === formData.email.toLowerCase());
+    const { data, error } = await supabase.auth.signUp({
+      email: formData.email,
+      password: formData.password,
+      options: { data: { name: formData.name } },
+    });
 
-    if (userExists) {
-      setError("Email này đã được sử dụng.");
+    if (error) {
+      setError(error.message);
       return;
     }
 
-    const newUser = {
-      id: Date.now().toString(),
-      name: formData.name,
-      email: formData.email,
-      password: formData.password,
-    };
-
-    users.push(newUser);
-    localStorage.setItem("users", JSON.stringify(users));
-
     setSuccess("Đăng ký thành công! Đang chuyển đến trang đăng nhập...");
-    setTimeout(() => {
-      router.push("/login");
-    }, 1500);
+    router.push("/login");
   };
 
   return (
