@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import Link from "next/link";
@@ -165,7 +165,7 @@ export default function CreateJarPage() {
 
             {/* Secret Code */}
             <div>
-              <label className="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-2 ml-1 flex items-center gap-1.5">
+              <label className="text-xs font-bold text-gray-500 uppercase tracking-wider mb-2 ml-1 flex items-center gap-1.5">
                 <Key className="w-3.5 h-3.5 text-brand-pink-dark" />
                 <span>Mã bảo mật chia sẻ *</span>
               </label>
@@ -184,7 +184,7 @@ export default function CreateJarPage() {
 
             {/* Message Notes List */}
             <div className="border-t border-brand-pink/10 pt-6">
-              <label className="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-4 ml-1 flex items-center justify-between">
+              <label className="text-xs font-bold text-gray-500 uppercase tracking-wider mb-4 ml-1 flex items-center justify-between">
                 <span>Soạn những viên thuốc tình yêu ({messages.length})</span>
                 <span className="text-[10px] text-gray-400 normal-case font-normal">Tối đa 50 viên</span>
               </label>

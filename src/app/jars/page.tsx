@@ -90,7 +90,7 @@ export default function JarsPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-[#FFF1F1]">
+      <div className="min-h-screen flex items-center justify-center bg-brand-pink-light">
         <div className="text-center">
           <Sparkles className="w-8 h-8 text-brand-pink animate-spin mx-auto mb-4" />
           <p className="text-gray-500 font-medium text-sm">Đang tải chiếc lọ của bạn...</p>

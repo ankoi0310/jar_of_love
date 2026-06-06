@@ -1,6 +1,5 @@
 "use client";
 
-import React from "react";
 import { motion } from "framer-motion";
 import { MessageCircleHeart, HelpCircle, EyeOff, History } from "lucide-react";
 
@@ -67,7 +66,7 @@ export default function Features() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.7 }}
-          className="mt-16 bg-gradient-to-tr from-brand-pink/10 via-white/50 to-brand-peach/10 border border-white/60 p-8 md:p-10 rounded-3xl flex flex-col md:flex-row items-center justify-between gap-8"
+          className="mt-16 bg-linear-to-tr from-brand-pink/10 via-white/50 to-brand-peach/10 border border-white/60 p-8 md:p-10 rounded-3xl flex flex-col md:flex-row items-center justify-between gap-8"
         >
           <div className="flex items-start gap-5">
             <div className="w-12 h-12 rounded-2xl bg-white border border-brand-pink/20 flex items-center justify-center shrink-0 shadow-sm">

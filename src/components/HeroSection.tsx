@@ -1,6 +1,5 @@
 "use client";
 
-import React from "react";
 import { motion } from "framer-motion";
 import { ArrowRight, Smartphone } from "lucide-react";
 import LoveJarPhysics from "./LoveJarPhysics";
@@ -27,7 +26,7 @@ export default function HeroSection() {
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-gray-900 leading-tight">
               Gói trọn yêu thương <br />
               vào từng{" "}
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-pink-dark to-brand-pink">
+              <span className="text-transparent bg-clip-text bg-linear-to-r from-brand-pink-dark to-brand-pink">
                 viên thuốc số
               </span>
               .

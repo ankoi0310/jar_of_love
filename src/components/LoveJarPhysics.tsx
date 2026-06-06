@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Matter from "matter-js";
 import { Heart, Sparkles } from "lucide-react";
 
@@ -386,7 +386,7 @@ export default function LoveJarPhysics() {
       {/* 3D Glass Jar effect frame using HTML/CSS overlay */}
       <div
         ref={containerRef}
-        className="relative overflow-hidden w-full h-[450px] bg-white/30 backdrop-blur-[6px] border border-white/50 shadow-[0_25px_60px_-15px_rgba(244,143,177,0.3)] rounded-[60px_60px_45px_45px] flex flex-col justify-end before:absolute before:inset-0 before:bg-gradient-to-tr before:from-transparent before:via-white/10 before:to-white/30 before:pointer-events-none after:absolute after:inset-y-0 after:left-4 after:w-8 after:bg-gradient-to-r after:from-white/20 after:to-transparent after:pointer-events-none"
+        className="relative overflow-hidden w-full h-[450px] bg-white/30 backdrop-blur-[6px] border border-white/50 shadow-[0_25px_60px_-15px_rgba(244,143,177,0.3)] rounded-[60px_60px_45px_45px] flex flex-col justify-end before:absolute before:inset-0 before:bg-linear-to-tr before:from-transparent before:via-white/10 before:to-white/30 before:pointer-events-none after:absolute after:inset-y-0 after:left-4 after:w-8 after:bg-linear-to-r after:from-white/20 after:to-transparent after:pointer-events-none"
       >
         <canvas ref={canvasRef} className="absolute inset-0 z-10 cursor-grab active:cursor-grabbing" />
 

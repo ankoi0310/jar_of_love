@@ -1,6 +1,5 @@
 "use client";
 
-import React from "react";
 import { motion } from "framer-motion";
 import { MessageSquareOff, HeartHandshake, Sparkles } from "lucide-react";
 
@@ -68,7 +67,7 @@ export default function WhySection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="mt-16 p-8 bg-gradient-to-r from-brand-pink/10 to-brand-peach/10 rounded-3xl max-w-3xl mx-auto border border-white/40 flex flex-col items-center"
+          className="mt-16 p-8 bg-linear-to-r from-brand-pink/10 to-brand-peach/10 rounded-3xl max-w-3xl mx-auto border border-white/40 flex flex-col items-center"
         >
           <Sparkles className="w-6 h-6 text-brand-pink-dark mb-3 animate-pulse" />
           <p className="text-lg md:text-xl font-medium text-gray-800 italic font-caveat">

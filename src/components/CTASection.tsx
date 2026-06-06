@@ -1,12 +1,11 @@
 "use client";
 
-import React from "react";
 import { motion } from "framer-motion";
 import { Sparkles } from "lucide-react";
 
 export default function CTASection() {
   return (
-    <section id="download" className="py-24 bg-gradient-to-b from-transparent to-brand-pink/20 relative overflow-hidden">
+    <section id="download" className="py-24 bg-linear-to-b from-transparent to-brand-pink/20 relative overflow-hidden">
       <div className="absolute top-1/2 left-10 w-48 h-48 rounded-full bg-brand-pink/10 blur-2xl pointer-events-none" />
       <div className="absolute bottom-10 right-10 w-72 h-72 rounded-full bg-brand-peach/20 blur-3xl pointer-events-none" />
 
