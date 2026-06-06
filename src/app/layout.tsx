@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Quicksand, Caveat } from "next/font/google";
+import { Quicksand, Caveat, Courier_Prime } from "next/font/google";
 import "./globals.css";
 
 const quicksand = Quicksand({
@@ -12,6 +12,12 @@ const caveat = Caveat({
   variable: "--font-caveat",
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
+});
+
+const courierPrime = Courier_Prime({
+  variable: "--font-courier-prime",
+  subsets: ["latin"],
+  weight: ["400", "700"],
 });
 
 export const metadata: Metadata = {
@@ -44,7 +50,7 @@ export default function RootLayout({
   return (
     <html
       lang="vi"
-      className={`${quicksand.variable} ${caveat.variable} h-full scroll-smooth antialiased`}
+      className={`${quicksand.variable} ${caveat.variable} ${courierPrime.variable} h-full scroll-smooth antialiased`}
     >
       <body className="min-h-full flex flex-col font-sans bg-[#FFF1F1] text-gray-800">
         {children}
