@@ -1,11 +1,12 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { Plus, Heart, Share2, Clipboard, Trash2, ShieldCheck, Sparkles, UserX } from "lucide-react";
+import { Plus, Heart, Clipboard, Trash2, ShieldCheck, Sparkles } from "lucide-react";
+import { useAuth } from "@/context/AuthContext";
 
 interface Jar {
   id: string;
@@ -18,27 +19,22 @@ interface Jar {
 
 export default function JarsPage() {
   const router = useRouter();
-  const [currentUser, setCurrentUser] = useState<any>(null);
+  const { user, loading: authLoading } = useAuth();
   const [jars, setJars] = useState<Jar[]>([]);
   const [copiedId, setCopiedId] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     // Check if user logged in
-    let user = JSON.parse(localStorage.getItem("currentUser") || "null");
-    
-    // Auto-login demo user if no one is logged in for ease of evaluation
+    if (authLoading) return;
     if (!user) {
-      const demoUser = { email: "demo@love.com", name: "Người Yêu Demo" };
-      localStorage.setItem("currentUser", JSON.stringify(demoUser));
-      user = demoUser;
+      router.push("/login");
+      return;
     }
-    
-    setCurrentUser(user);
 
     // Load Jars
     const savedJars = JSON.parse(localStorage.getItem(`jars_${user.email}`) || "[]");
-    
+
     // Seed default jars if empty
     if (savedJars.length === 0) {
       const defaultJars = [
@@ -65,7 +61,7 @@ export default function JarsPage() {
       setJars(savedJars);
     }
     setLoading(false);
-  }, []);
+  }, [authLoading, user]);
 
   const handleCopyLink = (code: string, id: string) => {
     const link = `${window.location.origin}/share/${code}`;
@@ -75,17 +71,12 @@ export default function JarsPage() {
   };
 
   const handleDeleteJar = (id: string) => {
-    if (!currentUser) return;
+    if (!user) return;
     if (confirm("Bạn có chắc chắn muốn xóa chiếc lọ này và tất cả lời nhắn bên trong?")) {
       const updated = jars.filter((j) => j.id !== id);
       setJars(updated);
-      localStorage.setItem(`jars_${currentUser.email}`, JSON.stringify(updated));
+      localStorage.setItem(`jars_${user.email}`, JSON.stringify(updated));
     }
-  };
-
-  const handleLogout = () => {
-    localStorage.removeItem("currentUser");
-    router.push("/login");
   };
 
   if (loading) {
@@ -114,7 +105,7 @@ export default function JarsPage() {
               Khu vườn tình yêu
             </span>
             <h1 className="text-3xl font-bold text-gray-900 mt-2">
-              Xin chào, <span className="text-brand-pink-dark">{currentUser?.name}</span> 👋
+              Xin chào, <span className="text-brand-pink-dark">{user?.name}</span> 👋
             </h1>
             <p className="text-sm text-gray-500 mt-1">Quản lý những chiếc lọ phép chứa đựng ngàn tâm tư của bạn</p>
           </div>
@@ -127,14 +118,6 @@ export default function JarsPage() {
               <Plus className="w-4 h-4" />
               <span>Tạo chiếc lọ mới</span>
             </Link>
-
-            <button
-              onClick={handleLogout}
-              className="flex items-center gap-2 px-5 py-3 bg-white hover:bg-red-50 text-gray-600 hover:text-red-600 border border-gray-200 rounded-full transition duration-300"
-            >
-              <UserX className="w-4 h-4" />
-              <span>Đăng xuất</span>
-            </button>
           </div>
         </div>
 
